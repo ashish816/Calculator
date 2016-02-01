@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+  </head>
+  <body>
+    <h1>Calculator</h1>
+    <div  ng-app="myApp" ng-controller="Ctrl1">
+    <form id= "EntryForm">
+      FirstNumber:<br> <input id="firstnumber" type = "text"  ng-model = "firstnumber"><br><br>
+      SecondNumber:<br> <input id ="secondnumber" type = "text" ng-model = "secondnumber"><br><br>
+      Operation :<br>
+      <button type="button" class="btn btn-primary" value="Add" ng-click = "add()">Add</button>
+      <button type="button" class="btn btn-primary" value="Subtract" ng-click = "subtract()">Subtract</button>
+      <button type="button" class="btn btn-primary" value="Divide" ng-click = "divide()">Divide</button>
+      <button type="button" class="btn btn-primary" value="Multiply" ng-click = "multiply()">Multiply</button><br></br>
+       <p>Result is : </p>{{result}}
+     </form>
+   </div>
+   <script>
+   var app = angular.module("myApp", []);
+   app.controller('Ctrl1', function($scope, $http) {
+     $scope.firstnumber;
+     $scope.secondnumber;
+     $scope.add=function(){
+     var userValues = {
+       firstnumber : $scope.firstnumber,
+       secondnumber : $scope.secondnumber,
+     };
+     $http.post('/add', userValues)
+                .success(function(res) {
+                  $scope.result = res;
+                })
+                .error(function(res) {
+                    console.log('Error: ' + res);
+                });
+};
+$scope.subtract=function(){
+var userValues = {
+  firstnumber : $scope.firstnumber,
+  secondnumber : $scope.secondnumber,
+};
+$http.post('/subtract', userValues)
+           .success(function(res) {
+             $scope.result = res;
+           })
+           .error(function(res) {
+               console.log('Error: ' + res);
+           });
+};
+
+$scope.divide=function(){
+var userValues = {
+  firstnumber : $scope.firstnumber,
+  secondnumber : $scope.secondnumber,
+};
+$http.post('/divide', userValues)
+           .success(function(res) {
+             $scope.result = res;
+           })
+           .error(function(res) {
+               console.log('Error: ' + res);
+           });
+};
+
+$scope.multiply=function(){
+var userValues = {
+  firstnumber : $scope.firstnumber,
+  secondnumber : $scope.secondnumber,
+};
+$http.post('/multiply', userValues)
+           .success(function(res) {
+             $scope.result = res;
+           })
+           .error(function(res) {
+               console.log('Error: ' + res);
+           });
+};
+   });
+   </script>
+  </body>
+</html>
